@@ -11,3 +11,21 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+eval "$(rbenv init -)"
+
+[[ -f /usr/local/bin/docker-machine ]] && eval "$(docker-machine env docker-dev)"
+
+[[ -f ~/.zshrc_local ]] && source ~/.zshrc_local
+
+alias ls='/bin/ls -qAF'
+
+alias j6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
+alias j7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
+alias j8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
+
+alias mmv='noglob zmv -W'
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+[[ $EMACS = t ]] && unsetopt zle
