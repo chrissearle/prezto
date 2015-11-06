@@ -24,6 +24,12 @@ alias j8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
 
 alias mmv='noglob zmv -W'
 
+# Ugh - prezto has -i as default
+alias cp='nocorrect cp'
+alias ln='nocorrect ln'
+alias mv='nocorrect mv'
+alias rm='nocorrect rm'
+
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 [[ $EMACS = t ]] && unsetopt zle
