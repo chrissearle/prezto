@@ -1,18 +1,9 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 # Customize to your needs...
-
-[[ -f /usr/local/bin/docker-machine ]] && eval "$(docker-machine env docker-dev)"
 
 [[ -f ~/.zshrc_local ]] && source ~/.zshrc_local
 
@@ -33,3 +24,4 @@ alias rm='nocorrect rm'
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 [[ $EMACS = t ]] && unsetopt zle
+
