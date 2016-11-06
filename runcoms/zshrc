@@ -21,6 +21,10 @@ alias ln='nocorrect ln'
 alias mv='nocorrect mv'
 alias rm='nocorrect rm'
 
+if [[ -f /usr/local/bin/hub ]]; then
+    alias git=hub
+fi
+
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 [[ $EMACS = t ]] && unsetopt zle
