@@ -9,9 +9,8 @@ fi
 
 alias ls='/bin/ls -qAF'
 
-alias j6='export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)'
-alias j7='export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)'
 alias j8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
+alias j11='export JAVA_HOME=$(/usr/libexec/java_home -v 11)'
 
 alias mmv='noglob zmv -W'
 
