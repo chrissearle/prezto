@@ -9,9 +9,6 @@ fi
 
 alias ls='/bin/ls -qAF'
 
-alias j8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)'
-alias j11='export JAVA_HOME=$(/usr/libexec/java_home -v 11)'
-
 alias mmv='noglob zmv -W'
 
 # Ugh - prezto has -i as default
@@ -36,8 +33,6 @@ if [[ -f /usr/local/bin/htop ]]; then
     alias top='sudo htop'
 fi
 
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-
 [[ $EMACS = t ]] && unsetopt zle
 
 if [[ -f /usr/Local/opt/nvm/nvm.sh ]]; then
@@ -45,3 +40,15 @@ if [[ -f /usr/Local/opt/nvm/nvm.sh ]]; then
     mkdir -p $NVM_DIR
     . "/usr/local/opt/nvm/nvm.sh"
 fi
+
+alias kubecontexts="kubectl config view  -o jsonpath='{.contexts[*].name}' | tr \" \" \"\n\""
+
+if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi
+
+if [ -s "/opt/local/sdkman/bin/sdkman-init.sh" ]; then
+    export SDKMAN_DIR="/opt/local/sdkman"
+    source "/opt/local/sdkman/bin/sdkman-init.sh"
+    alias j8="sdk use java 8.0.272.hs-adpt"
+    alias j11="sdk use java 11.0.9.hs-adpt"
+fi
+
