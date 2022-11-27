@@ -1,13 +1,35 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-# Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+[[ -f ~/.zshrc_local ]] && source ~/.zshrc_local
+
+alias ls='/bin/ls -qAF'
+alias mmv='noglob zmv -W'
+
+# Ugh - prezto has -i as default
+alias cp='nocorrect cp'
+alias ln='nocorrect ln'
+alias mv='nocorrect mv'
+alias rm='nocorrect rm'
+
+if [[ -f /usr/local/bin/prettyping ]]; then
+    alias ping=prettyping
+fi
+
+if [[ -f /usr/local/bin/htop ]]; then
+    alias top='sudo htop'
+fi
+
+[[ $EMACS = t ]] && unsetopt zle
+
+if [ -s "/opt/local/sdkman/bin/sdkman-init.sh" ]; then
+    export SDKMAN_DIR="/opt/local/sdkman"
+    source "/opt/local/sdkman/bin/sdkman-init.sh"
+fi
+
+export N_PREFIX=/opt/local
+
+if [[ -f /usr/local/bin/starship ]]; then
+    eval "$(starship init zsh)"
+fi
