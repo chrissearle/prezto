@@ -13,11 +13,12 @@ alias ln='nocorrect ln'
 alias mv='nocorrect mv'
 alias rm='nocorrect rm'
 
-if [[ -f /usr/local/bin/prettyping ]]; then
+
+if (( $+commands[prettyping] )); then
     alias ping=prettyping
 fi
 
-if [[ -f /usr/local/bin/htop ]]; then
+if (( $+commands[htop] )); then
     alias top='sudo htop'
 fi
 
@@ -30,6 +31,6 @@ fi
 
 export N_PREFIX=/opt/local
 
-if [[ -f /usr/local/bin/starship ]]; then
+if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
 fi
