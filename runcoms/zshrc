@@ -1,3 +1,5 @@
+local arch=$(uname -p 2>/dev/null)
+
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
@@ -38,4 +40,10 @@ export N_PREFIX=/opt/local
 
 if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
+fi
+
+# On m1 mac - homebrew completions not picked up - add to fpath and re-run compinit
+if [[ $arch == "arm" ]]; then
+  fpath=(/opt/homebrew/share/zsh/site-functions(N) ${fpath})
+  compinit
 fi
