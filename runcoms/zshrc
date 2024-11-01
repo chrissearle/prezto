@@ -26,17 +26,17 @@ fi
 
 [[ $EMACS = t ]] && unsetopt zle
 
-if [ -s "/opt/sdkman/bin/sdkman-init.sh" ]; then
-    export SDKMAN_DIR="/opt/sdkman"
-    source "/opt/sdkman/bin/sdkman-init.sh"
+if [ -f /opt/homebrew/bin/mise ]; then
+  eval "$(/opt/homebrew/bin/mise activate --shims zsh)"
 fi
 
-if [ -s "/opt/local/sdkman/bin/sdkman-init.sh" ]; then
-    export SDKMAN_DIR="/opt/local/sdkman"
-    source "/opt/local/sdkman/bin/sdkman-init.sh"
+if [ -f /opt/homebrew/bin/duf ]; then
+    alias df='/opt/homebrew/bin/duf'
 fi
 
-export N_PREFIX=/opt/local
+if [ -f /opt/homebrew/bin/dust ]; then
+    alias du='/opt/homebrew/bin/dust'
+fi
 
 if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
