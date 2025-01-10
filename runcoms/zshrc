@@ -47,3 +47,7 @@ if [[ $arch == "arm" ]]; then
   fpath=(/opt/homebrew/share/zsh/site-functions(N) ${fpath})
   compinit
 fi
+
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
