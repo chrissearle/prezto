@@ -55,3 +55,11 @@ fi
 if [ -f /opt/homebrew/bin/nvim ]; then
     alias vi=/opt/homebrew/bin/nvim
 fi
+
+if [ -f /opt/homebrew/bin/zoxide ]; then
+    eval "$(zoxide init zsh)"
+fi
+
+if [ -f /opt/homebrew/bin/fzf ]; then
+    source <(fzf --zsh)
+fi
