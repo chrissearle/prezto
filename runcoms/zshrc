@@ -58,6 +58,7 @@ fi
 
 if [ -f /opt/homebrew/bin/zoxide ]; then
     eval "$(zoxide init zsh)"
+    alias cd="z"
 fi
 
 if [ -f /opt/homebrew/bin/fzf ]; then
