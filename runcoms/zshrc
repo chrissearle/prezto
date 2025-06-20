@@ -66,3 +66,8 @@ fi
 if [ -f /opt/homebrew/bin/fzf ]; then
     source <(fzf --zsh)
 fi
+
+if [ -d $HOME/.codeium ]; then
+    # Added by Windsurf
+    export PATH="$HOME/.codeium/windsurf/bin:$PATH"
+fi
