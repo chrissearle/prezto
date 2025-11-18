@@ -71,3 +71,34 @@ if [ -d $HOME/.codeium ]; then
     # Added by Windsurf
     export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 fi
+
+if [ -d /opt/homebrew/opt/rustup ]; then
+    export PATH="$(brew --prefix rustup)/bin:$PATH"
+fi
+
+
+seal() {
+  if [ -z "$1" ]; then
+    echo "Usage: seal <basename or filename>"
+    return 1
+  fi
+
+  local input="$1"
+  local name="${input%.yaml}"
+
+  local src="${name}.yaml"
+  local dst="${name}-sealed.yaml"
+
+  if [ -f "$dst" ]; then
+    rm "$dst"
+    echo "Deleted existing $dst"
+  fi
+
+  if [ -f "$src" ]; then
+    kubeseal --format=yaml --controller-namespace=flux-system < "$src" >! "$dst"
+    echo "Created $dst"
+  else
+    echo "Error: $src not found"
+    return 1
+  fi
+}
