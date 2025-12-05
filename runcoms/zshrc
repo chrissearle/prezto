@@ -102,3 +102,34 @@ seal() {
     return 1
   fi
 }
+
+
+releasetag() {
+  local DATE
+  DATE=$(date +"%Y%m%d")
+
+  local PREFIX="v${DATE}"
+
+  local LAST
+  LAST=$(
+    git tag -l "${PREFIX}*" \
+    | sed "s/^${PREFIX}//" \
+    | grep -E '^[0-9]{2}$' \
+    | sort -n \
+    | tail -1
+  )
+
+  local NEXT
+  if [[ -z "$LAST" ]]; then
+    NEXT="01"
+  else
+    # 10# guards against octal interpretation
+    NEXT=$(printf "%02d" $((10#$LAST + 1)))
+  fi
+
+  local TAG="${PREFIX}${NEXT}"
+
+  echo "Creating tag: $TAG"
+  git tag "$TAG" || return 1
+  git push origin "$TAG"
+}
