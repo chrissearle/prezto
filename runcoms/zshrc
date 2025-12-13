@@ -65,6 +65,24 @@ fi
 
 if [ -f /opt/homebrew/bin/fzf ]; then
     source <(fzf --zsh)
+
+    if [ -f /opt/homebrew/bin/fd ]; then
+      export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+      export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+      export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+      _fzf_compgen_path() {
+        fd --hidden --exclude .git . "$1"
+      }
+
+      _fzf_compgen_dir() {
+        fd --type=d --hidden --exclude .git . "$1"
+      }
+    fi
+
+    if [ -f /usr/local/bin/fzf-git.sh ]; then
+      source /usr/local/bin/fzf-git.sh
+    fi
 fi
 
 if [ -d $HOME/.codeium ]; then
