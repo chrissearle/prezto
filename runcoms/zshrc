@@ -28,6 +28,7 @@ fi
 
 if [ -f /opt/homebrew/bin/mise ]; then
   eval "$(/opt/homebrew/bin/mise activate --shims zsh)"
+  export HOMEBREW_REQUIRE_TAP_TRUST=1
 fi
 
 if [ -f /opt/homebrew/bin/duf ]; then
@@ -161,3 +162,6 @@ function y() {
 	rm -f -- "$tmp"
 }
 fi
+
+# Created by `pipx` on 2026-04-13 20:06:12
+export PATH="$PATH:/Users/chris/.local/bin"
