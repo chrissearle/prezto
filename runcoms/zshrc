@@ -59,7 +59,7 @@ if [ -f /opt/homebrew/bin/nvim ]; then
     export VISUAL=/opt/homebrew/bin/nvim
 fi
 
-if [ -f /opt/homebrew/bin/zoxide ]; then
+if [ -f /opt/homebrew/bin/zoxide ] && [[ $- == *i* ]]; then
     eval "$(zoxide init zsh)"
     alias cd="z"
 fi
@@ -98,12 +98,17 @@ fi
 
 seal() {
   if [ -z "$1" ]; then
-    echo "Usage: seal <basename or filename>"
+    echo "Usage: seal <basename or filename> [--context <context>]"
     return 1
   fi
 
   local input="$1"
   local name="${input%.yaml}"
+  local context=""
+
+  if [ "$2" = "--context" ] && [ -n "$3" ]; then
+    context="--context $3"
+  fi
 
   local src="${name}.yaml"
   local dst="${name}-sealed.yaml"
@@ -114,14 +119,13 @@ seal() {
   fi
 
   if [ -f "$src" ]; then
-    kubeseal --format=yaml --controller-namespace=flux-system < "$src" >! "$dst"
+    kubeseal --format=yaml --controller-namespace=flux-system $context < "$src" >! "$dst"
     echo "Created $dst"
   else
     echo "Error: $src not found"
     return 1
   fi
 }
-
 
 releasetag() {
   local DATE
